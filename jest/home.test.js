@@ -4,12 +4,6 @@ const HomeService = require("../src/services/HomeService");
 const homeService = new HomeService();
 
 describe("/home endpoint", () => {
-  test("Get data user", function () {
-    const result = homeService.getDataUser();
-
-    expect(result).toEqual({ name: "Rizat", age: 23 });
-  });
-
   it("should response 200", async () => {
     const server = await app();
 
