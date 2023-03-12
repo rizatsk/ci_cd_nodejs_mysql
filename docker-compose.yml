@@ -1,0 +1,49 @@
+version: "Compose specification"
+
+services:
+  mysqlv8:
+    container_name: mysqlv8
+    image: mysql:8.0.32
+    # ports:
+    #   - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=qwertymysql
+      - MYSQL_DATABASE=db_docker
+    networks:
+      - node_network
+  nodeappserver:
+    container_name: nodeappserver
+    image: rizatdart/ci_cd_nodejs_mysql:latest
+    # ports:
+    #   - 5001:5001
+    depends_on:
+      - mysqlv8
+    environment:
+      - HOST=0.0.0.0
+      - PORT=5001
+      - DB_HOST=mysqlv8
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=qwertymysql
+      - DB_NAME=db_docker
+      - DB_TYPE=mysql
+    networks:
+      - node_network
+    volumes:
+      - C:\Users\Dartmedia\Documents\Data Rizat\Belajar Docker\Back End\public:/app/src/public
+  mynginx:
+    container_name: mynginx
+    image: mynginx:1.0.0
+    ports:
+      - 80:80
+    depends_on:
+      - mysqlv8
+      - nodeappserver
+    networks:
+      - node_network
+    volumes:
+      - C:\Users\Dartmedia\Documents\Data Rizat\CI-CD\nginx:/etc/nginx/conf.d
+
+networks:
+  node_network:
+    name: node_network
