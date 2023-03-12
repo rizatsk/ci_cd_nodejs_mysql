@@ -1,7 +1,4 @@
 const app = require("../src/app");
-const HomeService = require("../src/services/HomeService");
-
-const homeService = new HomeService();
 
 describe("/home endpoint", () => {
   it("should response 200", async () => {
