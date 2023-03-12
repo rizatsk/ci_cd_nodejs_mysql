@@ -16,6 +16,6 @@ describe("/home endpoint", () => {
     console.log(responseJson);
     expect(response.statusCode).toEqual(200);
     expect(responseJson.status).toEqual("success");
-    expect(responseJson.message).toEqual("Welcome To The Docker");
+    expect(responseJson.message).toEqual("Welcome To The Docker Bro");
   });
 });
