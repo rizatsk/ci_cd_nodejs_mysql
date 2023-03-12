@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     services:
@@ -30,21 +30,21 @@ jobs:
       - run: npm install
       - name: Run database migration
         env:
-          DB_HOST: localhost
-          DB_PORT: 3306
-          DB_USER: root
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          DB_TYPE: mysql
+          DB_HOST_TEST: localhost
+          DB_PORT_TEST: 3306
+          DB_USER_TEST: root
+          DB_PASSWORD_TEST: ${{ secrets.DB_PASSWORD }}
+          DB_NAME_TEST: ${{ secrets.DB_NAME }}
+          DB_TYPE_TEST: mysql
         run: npx sequelize db:migrate
       - name: Run testing
         env:
           HOST: localhost
           PORT: 5001
-          DB_HOST: localhost
-          DB_PORT: 3306
-          DB_USER: root
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          DB_TYPE: mysql
+          DB_HOST_TEST: localhost
+          DB_PORT_TEST: 3306
+          DB_USER_TEST: root
+          DB_PASSWORD_TEST: ${{ secrets.DB_PASSWORD }}
+          DB_NAME_TEST: ${{ secrets.DB_NAME }}
+          DB_TYPE_TEST: mysql
         run: npm test
