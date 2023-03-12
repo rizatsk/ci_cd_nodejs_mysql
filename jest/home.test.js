@@ -1,7 +1,4 @@
 const app = require("../src/app");
-const HomeService = require("../src/services/HomeService");
-
-const homeService = new HomeService();
 
 describe("/home endpoint", () => {
   it("should response 200", async () => {
@@ -17,6 +14,5 @@ describe("/home endpoint", () => {
     expect(response.statusCode).toEqual(200);
     expect(responseJson.status).toEqual("success");
     expect(responseJson.message).toEqual("Welcome To The Docker Bro");
-    expect(responseJson.message).toEqual("Welcome To The Docker Bros");
   });
 });
